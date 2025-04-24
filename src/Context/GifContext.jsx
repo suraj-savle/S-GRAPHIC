@@ -1,23 +1,35 @@
 import { GiphyFetch } from "@giphy/js-fetch-api";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-const GifContecxt = createContext();
+const GifContext = createContext();
 
-const GifProvider = ({ Children }) => {
-
+const GifProvider = ({ children }) => {
   const [gifs, setGifs] = useState([]);
   const [filter, setFilter] = useState("gifs");
   const [favorites, setFavorites] = useState([]);
 
   const GIF = new GiphyFetch(import.meta.env.VITE_GIPHY_KEY);
 
+
   return (
-    <GifContecxt.Provider value={{ GIF , gifs ,filter,setGifs,setFilter,favorites}}>{Children}</GifContecxt.Provider>
+    <GifContext.Provider
+      value={{
+        GIF,
+        gifs,
+        filter,
+        setGifs,
+        setFilter,
+        favorites,
+        setFavorites,
+      }}
+    >
+      {children}
+    </GifContext.Provider>
   );
 };
 
 export const GifState = () => {
-  return useContext(GifContecxt);
+  return useContext(GifContext);
 };
 
 export default GifProvider;

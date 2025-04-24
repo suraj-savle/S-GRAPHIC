@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../index.css";
-// Updated logo import
-import logo from "../assets/logo.png"; // Replace with the correct path to your new logo
+import logo from "../assets/logo.png";
 import { TiThMenu } from "react-icons/ti";
 import { GifState } from "../Context/GifContext";
 
 function Header() {
   const [Isopen, setISopen] = useState(false);
+  const [categories, setcategories] = useState([]);
+  const { filter, setFilter, favorites, } = GifState();
 
-  const { filter, setFilter, favorites } = GifState();
+  const fetchGifCategories = async () => {
+    const res = await fetch("/categories.json");
+    const {data} = await res.json();
+    setcategories(data);
+  };
+
+  useEffect(() => {
+    fetchGifCategories();
+  }, []);
 
   return (
     <header className="text-white">
@@ -28,17 +37,17 @@ function Header() {
         {/* Navigation Links */}
         <div className="flex items-center gap-1 md:gap-8">
           <div className="hidden md:flex gap-4">
-          {categories?.slice(0, 5).map((category) => {
-            return (
-              <Link
-                className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
-                key={category.name}
-                to={`/${category.name_encoded}`}
-              >
-                {category.name}
-              </Link>
-            );
-          })}
+            {categories?.slice(0, 5).map((category) => {
+              return (
+                <Link
+                  className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
+                  key={category.name}
+                  to={`/${category.name_encoded}`}
+                >
+                  {category.name}
+                </Link>
+              );
+            })}
           </div>
 
           {favorites.length > 0 && (
@@ -63,88 +72,19 @@ function Header() {
         }`}
       >
         <h1 className="text-2xl font-bold mb-6">Categories</h1>
-
-        <div className="flex justify-around items-start mb-3">
-          {/* Column 1 */}
-          <div className="space-y-2">
-            <p className="font-semibold text-gray-800">GIPHY Studios</p>
-            <ul className="space-y-1">
-              <li>
-                <Link to="/animals" className="text-gray-700 hover:underline">
-                  Animals
-                </Link>
-              </li>
-              <li>
-                <Link to="/actions" className="text-gray-700 hover:underline">
-                  Actions
-                </Link>
-              </li>
-              <li>
-                <Link to="/anime" className="text-gray-700 hover:underline">
-                  Anime
-                </Link>
-              </li>
-              <li>
-                <Link to="/cartoons" className="text-gray-700 hover:underline">
-                  Cartoons
-                </Link>
-              </li>
-              <li>
-                <Link to="/emotions" className="text-gray-700 hover:underline">
-                  Emotions
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 2 */}
-          <div className="space-y-1">
-            <p className="font-semibold text-gray-800">Food/Drink</p>
-            <ul className="space-y-1">
-              <li>
-                <Link to="/gaming" className="text-gray-700 hover:underline">
-                  Gaming
-                </Link>
-              </li>
-              <li>
-                <Link to="/holidays" className="text-gray-700 hover:underline">
-                  Holidays/Greetings
-                </Link>
-              </li>
-              <li>
-                <Link to="/memes" className="text-gray-700 hover:underline">
-                  Memes
-                </Link>
-              </li>
-              <li>
-                <Link to="/clips" className="text-gray-700 hover:underline">
-                  Clips
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3 */}
-          <div className="space-y-2">
-            <p className="font-semibold text-gray-800">Originals</p>
-            <ul className="space-y-1">
-              <li>
-                <Link to="/trending" className="text-gray-700 hover:underline">
-                  Trending
-                </Link>
-              </li>
-              <li>
-                <Link to="/reactions" className="text-gray-700 hover:underline">
-                  Reactions
-                </Link>
-              </li>
-              <li>
-                <Link to="/packs" className="text-gray-700 hover:underline">
-                  Packs
-                </Link>
-              </li>
-            </ul>
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          {categories?.map((category) => {
+            return (
+              <Link
+                onClick={() => setISopen(false)}
+                className="transition ease-in-out font-bold"
+                key={category.name}
+                to={`/${category.name_encoded}`}
+              >
+                {category.name}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="border-t border-gray-200 pt-4 text-sm text-gray-900 text-center">
