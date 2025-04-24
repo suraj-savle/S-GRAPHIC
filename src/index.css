@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+:root {
+    --color-primary : #8F87F1;
+    --color-secondary : #C68EFD;
+    --color-third : #E9A5F1;
+}
+
+
+*{
+    box-sizing: border-box;
+}
+
+html,body{
+    background: #000;
+    color: white;
+}
