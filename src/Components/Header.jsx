@@ -4,9 +4,12 @@ import "../index.css";
 // Updated logo import
 import logo from "../assets/logo.png"; // Replace with the correct path to your new logo
 import { TiThMenu } from "react-icons/ti";
+import { GifState } from "../Context/GifContext";
 
 function Header() {
   const [Isopen, setISopen] = useState(false);
+
+  const { filter, setFilter, favorites } = GifState();
 
   return (
     <header className="text-white">
@@ -25,42 +28,25 @@ function Header() {
         {/* Navigation Links */}
         <div className="flex items-center gap-1 md:gap-8">
           <div className="hidden md:flex gap-4">
-            <Link
-              className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
-              to="/reaction"
-              aria-label="Reaction"
-            >
-              Reaction
-            </Link>
-            <Link
-              className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
-              to="/entertainment"
-              aria-label="Entertainment"
-            >
-              Entertainment
-            </Link>
-            <Link
-              className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
-              to="/sticker"
-              aria-label="Sticker"
-            >
-              Sticker
-            </Link>
-            <Link
-              className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
-              to="/anime"
-              aria-label="Anime"
-            >
-              Anime
-            </Link>
+          {categories?.slice(0, 5).map((category) => {
+            return (
+              <Link
+                className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
+                key={category.name}
+                to={`/${category.name_encoded}`}
+              >
+                {category.name}
+              </Link>
+            );
+          })}
           </div>
 
-          {/* Favorite Link */}
-          <div className="text-center px-4 py-2 bg-pink-500 rounded hover:bg-pink-400">
-            <Link to="/favorite" aria-label="Favorite">
-              Favorite
-            </Link>
-          </div>
+          {favorites.length > 0 && (
+            <div className="text-center px-4 py-2 bg-pink-500 rounded hover:bg-pink-400">
+              <Link to="/favorites">Favorite GIFs</Link>
+            </div>
+          )}
+
           <div>
             <TiThMenu
               className="text-5xl cursor-pointer"
