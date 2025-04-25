@@ -49,7 +49,9 @@ const GifPage = () => {
 
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = `${gif.slug || gif.id}.${type === "stickers" ? "webp" : "gif"}`;
+      link.download = `${gif.slug || gif.id}.${
+        type === "stickers" ? "webp" : "gif"
+      }`;
       document.body.appendChild(link);
       link.click();
 
@@ -66,15 +68,46 @@ const GifPage = () => {
 
   const copyGifLink = () => {
     const gifUrl = `${window.location.origin}/${type}/${slug}`;
-    navigator.clipboard
-      .writeText(gifUrl)
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch(() => setCopied(false));
+
+    // Create temporary input element
+    const input = document.createElement("input");
+    input.value = gifUrl;
+    input.style.position = "absolute";
+    input.style.left = "-9999px";
+    document.body.appendChild(input);
+    input.select();
+
+    try {
+      // Try modern clipboard API first
+      if (navigator.clipboard) {
+        navigator.clipboard
+          .writeText(gifUrl)
+          .then(() => showSuccess())
+          .catch(() => fallbackCopy(input));
+      } else {
+        // Fallback for older browsers
+        fallbackCopy(input);
+      }
+    } catch (err) {
+      fallbackCopy(input);
+    } finally {
+      document.body.removeChild(input);
+    }
   };
 
+  const fallbackCopy = (input) => {
+    try {
+      document.execCommand("copy");
+      showSuccess();
+    } catch (err) {
+      alert("Please copy manually: " + input.value);
+    }
+  };
+
+  const showSuccess = () => {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   return (
     <div className="flex flex-col sm:flex-row my-10 gap-6 px-5 sm:px-10 md:px-20">
       <div className="hidden sm:block">
@@ -90,13 +123,14 @@ const GifPage = () => {
             <div className="flex sm:hidden gap-4 mt-4 justify-center">
               <button
                 onClick={copyGifLink}
+                onTouchEnd={copyGifLink} // Added for mobile touch
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                   copied ? "bg-green-600" : "bg-gray-800 hover:bg-gray-700"
                 }`}
               >
                 <FaLink size={20} />
                 <span>{copied ? "Copied!" : "Copy Link"}</span>
-              </button>
+              </button> 
               <button
                 onClick={downloadGif}
                 disabled={downloading}
@@ -149,7 +183,7 @@ const GifPage = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="block sm:hidden border-t-2 pt-4">
         <FollowOn />
       </div>
