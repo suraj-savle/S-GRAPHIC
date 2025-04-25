@@ -23,7 +23,7 @@ const SearchPage = () => {
         sort: "relevant",
         lang: "en",
         type: filter,
-        limit: 50, // Increased limit for better initial results
+        limit: 50, 
       });
       
       setSearchResults(data);

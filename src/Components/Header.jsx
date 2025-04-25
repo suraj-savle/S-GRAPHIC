@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import "../index.css";
 import logo from "../assets/logo.png";
 import { TiThMenu } from "react-icons/ti";
-import { GifState } from "../Context/GifContext";
 
 function Header() {
   const [Isopen, setISopen] = useState(false);
   const [categories, setcategories] = useState([]);
-  const { filter, setFilter, favorites } = GifState();
 
   const fetchGifCategories = async () => {
     const res = await fetch("/categories.json");
@@ -49,12 +47,6 @@ function Header() {
               );
             })}
           </div>
-
-          {favorites.length > 0 && (
-            <div className="text-center px-4 py-2 bg-pink-500 rounded hover:bg-pink-400 transition-colors duration-300 transform hover:scale-105">
-              <Link to="/favorites">Favorite GIFs</Link>
-            </div>
-          )}
 
           <div>
             <TiThMenu

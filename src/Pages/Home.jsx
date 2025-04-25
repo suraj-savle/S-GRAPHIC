@@ -3,8 +3,7 @@ import { GifState } from "../context/GifContext";
 import Gif from "../components/Gif";
 import GifSearch from "../components/GifSearch";
 import FilterGif from "../components/FilterGif";
-import Loader from "../components/Loader"; // Consider creating a dedicated Loader component
-
+import Loader from "../components/Loader"; 
 function Home() {
   const { GIF, gifs, setGifs, filter } = GifState();
   const [loading, setLoading] = useState(true);
