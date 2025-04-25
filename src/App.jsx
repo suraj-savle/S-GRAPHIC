@@ -1,11 +1,12 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import "./index.css"
+import SearchPage from './Pages/Search'
 
 const Home = lazy(() => import('./Pages/Home'))
 const Category = lazy(() => import('./Pages/Category'))
 const Favorite = lazy(() => import('./Pages/Favorite'))
-const Gif = lazy(() => import('./Pages/Gif'))
+const Gif = lazy(() => import('./Pages/SingleGif'))
 const Header = lazy(() => import('./Components/Header'))
 
 function App() {
@@ -15,9 +16,10 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/category/:id' element={<Category />} />
-          <Route path='/favorite' element={<Favorite />} />
-          <Route path='/gif/:id' element={<Gif />} />
+          <Route path='/:category' element={<Category />} />
+          <Route path='/search/:query' element={<SearchPage />} />
+          <Route path='/favorites' element={<Favorite />} />
+          <Route path='/:type/:slug' element={<Gif />} />
           <Route path='*' element={<div>404 - Page Not Found</div>} />
         </Routes>
       </Suspense>

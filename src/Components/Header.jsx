@@ -8,11 +8,11 @@ import { GifState } from "../Context/GifContext";
 function Header() {
   const [Isopen, setISopen] = useState(false);
   const [categories, setcategories] = useState([]);
-  const { filter, setFilter, favorites, } = GifState();
+  const { filter, setFilter, favorites } = GifState();
 
   const fetchGifCategories = async () => {
     const res = await fetch("/categories.json");
-    const {data} = await res.json();
+    const { data } = await res.json();
     setcategories(data);
   };
 
@@ -29,7 +29,7 @@ function Header() {
             <img
               src={logo}
               alt="S-GRAPHIC Logo"
-              className="w-50 h-auto object-cover"
+              className="w-50 h-auto object-cover transition-transform duration-300 hover:scale-105"
             />
           </Link>
         </nav>
@@ -40,7 +40,7 @@ function Header() {
             {categories?.slice(0, 5).map((category) => {
               return (
                 <Link
-                  className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700"
+                  className="p-2 border-b-4 border-purple-400 bg-gray-800 rounded hover:bg-gray-700 transition-all duration-300 hover:scale-105"
                   key={category.name}
                   to={`/${category.name_encoded}`}
                 >
@@ -51,14 +51,14 @@ function Header() {
           </div>
 
           {favorites.length > 0 && (
-            <div className="text-center px-4 py-2 bg-pink-500 rounded hover:bg-pink-400">
+            <div className="text-center px-4 py-2 bg-pink-500 rounded hover:bg-pink-400 transition-colors duration-300 transform hover:scale-105">
               <Link to="/favorites">Favorite GIFs</Link>
             </div>
           )}
 
           <div>
             <TiThMenu
-              className="text-5xl cursor-pointer"
+              className="text-5xl cursor-pointer hover:text-pink-400 transition-colors duration-300 transform hover:scale-110"
               onClick={() => setISopen(!Isopen)}
             />
           </div>
@@ -67,17 +67,19 @@ function Header() {
 
       {/* Mobile Responsive or Other Categories */}
       <div
-        className={`max-w-6xl mx-auto px-4 py-8 bg-pink-500 rounded ${
-          Isopen ? "block" : "hidden"
+        className={`mx-5 md:mx-10 my-3 px-4 py-8 bg-pink-500 rounded transition-all duration-500 ease-in-out ${
+          Isopen
+            ? "block opacity-100 translate-y-0"
+            : "hidden opacity-0 -translate-y-5"
         }`}
       >
         <h1 className="text-2xl font-bold mb-6">Categories</h1>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-3">
           {categories?.map((category) => {
             return (
               <Link
                 onClick={() => setISopen(false)}
-                className="transition ease-in-out font-bold"
+                className="transition-all duration-300 font-bold hover:text-purple-200 hover:scale-105"
                 key={category.name}
                 to={`/${category.name_encoded}`}
               >
@@ -87,14 +89,14 @@ function Header() {
           })}
         </div>
 
-        <div className="border-t border-gray-200 pt-4 text-sm text-gray-900 text-center">
+        <div className="border-t border-gray-200 pt-4 text-sm text-gray-900 text-center transition-opacity duration-500">
           <p>
             © 2025 Suraj Savle, Inc. | Powered by{" "}
             <a
               href="https://developers.giphy.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-600 hover:underline"
+              className="text-purple-600 hover:underline transition-colors duration-300"
             >
               GIPHY API
             </a>
