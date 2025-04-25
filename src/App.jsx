@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import "./index.css"
 import SearchPage from './Pages/Search'
-import Loader from './components/Loader'
+import Loader from './Components/Loader'
 
 const Home = lazy(() => import('./Pages/Home'))
 const Category = lazy(() => import('./Pages/Category'))

@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
-import { GifState } from "../context/GifContext";
+import { GifState } from "../Context/GifContext";
 import { useParams } from "react-router-dom";
-import Gif from "../components/Gif";
-import FilterGif from "../components/FilterGif";
-import Loader from "../components/Loader";
+import Gif from "../Components/Gif";
+import FilterGif from "../Components/FilterGif";
+import Loader from "../Components/Loader";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);

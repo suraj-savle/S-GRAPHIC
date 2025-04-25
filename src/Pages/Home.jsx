@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
-import { GifState } from "../context/GifContext";
-import Gif from "../components/Gif";
-import GifSearch from "../components/GifSearch";
-import FilterGif from "../components/FilterGif";
-import Loader from "../components/Loader"; 
+import { GifState } from "../Context/GifContext";
+import Gif from "../Components/Gif";
+import GifSearch from "../Components/GifSearch";
+import FilterGif from "../Components/FilterGif";
+import Loader from "../Components/Loader"; 
 function Home() {
   const { GIF, gifs, setGifs, filter } = GifState();
   const [loading, setLoading] = useState(true);

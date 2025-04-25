@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
-import { GifState } from "../context/GifContext";
+import { GifState } from "../Context/GifContext";
 import { useParams } from "react-router-dom";
-import Gif from "../components/Gif";
-import FollowOn from "../components/Follow";
-import Loader from "../components/Loader"; // Consider adding a loader
+import Gif from "../Components/Gif";
+import FollowOn from "../Components/Follow";
+import Loader from "../Components/Loader"; // Consider adding a loader
 
 const Category = () => {
   const [searchResults, setSearchResults] = useState([]);
