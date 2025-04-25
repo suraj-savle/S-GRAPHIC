@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GifState } from "../context/GifContext";
-import Gif from "../components/Gif";
-import FollowOn from "../components/Follow";
+import { GifState } from "../Context/GifContext";
+import Gif from "../Components/Gif";
+import FollowOn from "../Components/Follow";
 import { FaLink, FaDownload } from "react-icons/fa6";
 
 const contentType = ["gifs", "stickers", "texts"];
