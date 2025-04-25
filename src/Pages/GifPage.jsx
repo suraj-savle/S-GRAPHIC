@@ -3,9 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { GifState } from "../context/GifContext";
 import Gif from "../components/Gif";
 import FollowOn from "../components/Follow";
-
-import { FaLink } from "react-icons/fa6";
-import { FaDownload } from "react-icons/fa6";
+import { FaLink, FaDownload } from "react-icons/fa6";
 
 const contentType = ["gifs", "stickers", "texts"];
 
@@ -14,6 +12,8 @@ const GifPage = () => {
   const navigate = useNavigate();
   const [gif, setGif] = useState({});
   const [relatedGifs, setRelatedGifs] = useState([]);
+  const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const { GIF } = GifState();
 
@@ -39,6 +39,7 @@ const GifPage = () => {
 
   const downloadGif = async () => {
     try {
+      setDownloading(true);
       const url = gif.images?.original?.url || gif.images?.downsized?.url;
       if (!url) return;
 
@@ -48,19 +49,18 @@ const GifPage = () => {
 
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = `${gif.slug || gif.id}.${
-        type === "stickers" ? "webp" : "gif"
-      }`;
+      link.download = `${gif.slug || gif.id}.${type === "stickers" ? "webp" : "gif"}`;
       document.body.appendChild(link);
       link.click();
 
-      // Cleanup
       setTimeout(() => {
         document.body.removeChild(link);
         window.URL.revokeObjectURL(blobUrl);
+        setDownloading(false);
       }, 100);
     } catch (error) {
       console.error("Download failed:", error);
+      setDownloading(false);
     }
   };
 
@@ -68,8 +68,11 @@ const GifPage = () => {
     const gifUrl = `${window.location.origin}/${type}/${slug}`;
     navigator.clipboard
       .writeText(gifUrl)
-      .then(() => alert("Link copied to clipboard!"))
-      .catch(() => alert("Failed to copy link"));
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => setCopied(false));
   };
 
   return (
@@ -83,40 +86,50 @@ const GifPage = () => {
           <div className="flex-1">
             <Gif gif={gif} hover={false} />
 
-            {/* Mobile share/embed buttons */}
+            {/* Mobile buttons */}
             <div className="flex sm:hidden gap-4 mt-4 justify-center">
               <button
                 onClick={copyGifLink}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                  copied ? "bg-green-600" : "bg-gray-800 hover:bg-gray-700"
+                }`}
               >
                 <FaLink size={20} />
-                <span>Copy Link</span>
+                <span>{copied ? "Copied!" : "Copy Link"}</span>
               </button>
               <button
                 onClick={downloadGif}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg"
+                disabled={downloading}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
+                  downloading ? "bg-gray-600" : "bg-gray-800 hover:bg-gray-700"
+                }`}
               >
                 <FaDownload size={20} />
-                <span>Download</span>
+                <span>{downloading ? "Downloading..." : "Download"}</span>
               </button>
             </div>
           </div>
 
-          {/* Desktop share/embed buttons */}
+          {/* Desktop buttons */}
           <div className="hidden sm:flex flex-col gap-4">
             <button
               onClick={copyGifLink}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                copied ? "bg-green-600" : "bg-gray-800 hover:bg-gray-700"
+              }`}
             >
               <FaLink size={20} />
-              <span>Copy Link</span>
+              <span>{copied ? "Copied!" : "Copy Link"}</span>
             </button>
             <button
               onClick={downloadGif}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg"
+              disabled={downloading}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
+                downloading ? "bg-gray-600" : "bg-gray-800 hover:bg-gray-700"
+              }`}
             >
               <FaDownload size={20} />
-              <span>Download</span>
+              <span>{downloading ? "Downloading..." : "Download"}</span>
             </button>
           </div>
         </div>
@@ -128,7 +141,7 @@ const GifPage = () => {
               <div
                 key={relatedGif.id}
                 onClick={() => handleRelatedGifClick(relatedGif)}
-                className="cursor-pointer mb-2"
+                className="cursor-pointer mb-2 hover:opacity-90 transition-opacity"
               >
                 <Gif gif={relatedGif} />
               </div>
@@ -136,7 +149,8 @@ const GifPage = () => {
           </div>
         </div>
       </div>
-      <div className="block sm:hidden border-t-2">
+      
+      <div className="block sm:hidden border-t-2 pt-4">
         <FollowOn />
       </div>
     </div>
