@@ -36,3 +36,4 @@ Preview : ![Untitled design](https://github.com/user-attachments/assets/6bdfab2e
 3. npm install
 4. npm run dev
 
+Note: This project uses the GIPHY API to fetch stickers and GIFs. To run the project, create an account on GIPHY Developers, generate a new API key, create a .env file in the root folder, and add VITE_GIPHY_KEY=your_api_key_here. After that, you're ready to go!
