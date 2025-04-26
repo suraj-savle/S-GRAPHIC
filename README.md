@@ -1,14 +1,18 @@
-S-GRAPHIC - platform for downloading stickers, GIFs, and text!
+# S-GRAPHIC 🎨  
+A platform for downloading stickers, GIFs, and text!**  
 
-Preview :
-![image](https://github.com/user-attachments/assets/04d67be9-971f-43cd-9ab6-41e15c892bf7)
-![image](https://github.com/user-attachments/assets/3d1ea4b0-42d8-42a0-9378-e8e006a9ebf8)
-
-
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-S--GRAPHIC-brightgreen)](https://s-graphic.vercel.app/)  
+Preview : ![Untitled design](https://github.com/user-attachments/assets/6bdfab2e-cbb5-4b50-b16e-85d84e6426f5)
 
 
----
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-S--GRAPHIC-brightgreen)](https://s-graphic.vercel.app/)  [![GitHub license](https://img.shields.io/github/license/suraj-savle/S-GRAPHIC)](LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/suraj-savle/S-GRAPHIC)](https://github.com/suraj-savle/S-GRAPHIC/stargazers)  
+
+## 🌟 Let's Connect  
+<a href="https://linkedin.com/in/surjsavle/" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn">
+</a>  
+<a href="https://github.com/suraj-savle" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github" alt="GitHub">
+</a>
 
 ## **✨ Features**  
 ✅ Search – Find stickers/GIFs quickly  
