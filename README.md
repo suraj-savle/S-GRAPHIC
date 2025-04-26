@@ -1,12 +1,38 @@
-# React + Vite
+S-GRAPHIC - platform for downloading stickers, GIFs, and text!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Preview :
+![image](https://github.com/user-attachments/assets/04d67be9-971f-43cd-9ab6-41e15c892bf7)
+![image](https://github.com/user-attachments/assets/3d1ea4b0-42d8-42a0-9378-e8e006a9ebf8)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-S--GRAPHIC-brightgreen)](https://s-graphic.vercel.app/)  
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## **✨ Features**  
+✅ Search – Find stickers/GIFs quickly  
+✅ Categories – Browse by trending, reactions, etc.  
+✅ Download – Save in multiple formats (GIF, PNG, WebP)  
+✅ Copy Link – One-click sharing  
+✅ Responsive – Works on mobile & desktop  
+
+---
+
+🛠 Tech Stack  
+- React.js
+- Tailwind CSS
+- API (GIPHY)
+- Vercel (Deployment)
+
+---
+
+🚀 Quick Setup  
+1. Clone the repo  
+   ```bash
+   git clone https://github.com/suraj-savle/S-GRAPHIC.git
+
+2. cd S-GRAPHIC
+3. npm install
+4. npm run dev
+
