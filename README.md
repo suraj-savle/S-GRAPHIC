@@ -7,12 +7,8 @@ Preview : ![Untitled design](https://github.com/user-attachments/assets/6bdfab2e
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-S--GRAPHIC-brightgreen)](https://s-graphic.vercel.app/)  [![GitHub license](https://img.shields.io/github/license/suraj-savle/S-GRAPHIC)](LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/suraj-savle/S-GRAPHIC)](https://github.com/suraj-savle/S-GRAPHIC/stargazers)  
 
 ## 🌟 Let's Connect  
-<a href="https://linkedin.com/in/surjsavle/" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn">
-</a>  
-<a href="https://github.com/suraj-savle" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github" alt="GitHub">
-</a>
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/surajsavle/)  
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/suraj-savle)  
 
 ## **✨ Features**  
 ✅ Search – Find stickers/GIFs quickly  
